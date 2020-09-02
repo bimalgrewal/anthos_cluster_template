@@ -1,7 +1,7 @@
 #### Run it locally
 
 1. `pip install -r requirements.txt`
-2. Update the `cluster-0.yaml` and the template files in the `node_pool/` and `user_cluster/` directory accordingly.
+2. Update the `cluster-0.yaml`, and the template files in the `node_pool/` and `user_cluster/` directory.
 
 #### Execute the following command to populate the user cluster template
 
