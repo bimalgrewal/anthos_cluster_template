@@ -17,10 +17,19 @@ python3 user_cluster/cluster.py --configFile cluster-0.yaml --templateFile user_
             --securityGroupIDs sg-1 sg-2 sg-3 \
             --rootVolSize 5 --etcdVolSize 10 \
             --hubMembershipName elite \
-            --tag1 tes-tag1 \
-            --tag2 tes-tag2 \
-            --tag3 tes-tag3 \
-            --tag4 tes-tag4 \
+            --CostCentre London \
+            --ProjectCode LSP \
+            --ApplicationName LSP \
+            --BusinessEntity LSEG \
+            --Region europe-west2 \
+            --Environment dev \
+            --AWSResourceType ec2 \
+            --BusinessUnit lseg-london \
+            --ApplicationID lsp \
+            --Reason deployment \
+            --Owner lseg \
+            --ManagedBy lseg \
+            --Automation abc \
 ```
 
 #### Execute the following command to populate the Node Pool template

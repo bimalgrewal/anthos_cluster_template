@@ -68,6 +68,7 @@ def read_nodepool_yaml(yaml_file):
         for dic in parsed_yaml:
             if dic["kind"] == "AWSNodePool":
                 return dic
+        return None
     except OSError as error:
         print("ERROR: Could not parse file: ", error)
         sys.exit()
@@ -118,11 +119,14 @@ if __name__ == "__main__":
     parsed_cluster0_yaml = read_nodepool_yaml(config_file)
     parsed_template_yaml = read_nodepool_yaml(template_file)
 
-    # Populate template file
-    merged_template = merge_data_template(parsed_template_yaml, parsed_cluster0_yaml)
+    if parsed_cluster0_yaml is not None and parsed_template_yaml is not None:
+        # Populate template file
+        merged_template = merge_data_template(parsed_template_yaml, parsed_cluster0_yaml)
 
-    # Create the output YAML file
-    output = open(output_file, 'w+')
-    yaml.dump(merged_template, output, allow_unicode=True, default_flow_style=False)
+        # Create the output YAML file
+        output = open(output_file, 'w+')
+        yaml.dump(merged_template, output, allow_unicode=True, default_flow_style=False)
 
-    print("DONE.... %s CREATED." % output_file)
+        print("DONE.... %s CREATED." % output_file)
+    else:
+        print("ERROR: 'AWSNodePool' not present in the config or the template")

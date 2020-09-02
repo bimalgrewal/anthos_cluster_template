@@ -28,10 +28,19 @@ spec:
     hub:
       membershipName: argeParseArgument
     tags:
-      tag1: argeParseArgument
-      tag2: argeParseArgument
-      tag3: argeParseArgument
-      tag4: argeParseArgument
+      CostCentre: London
+      ProjectCode: abc
+      ApplicationName: lsp
+      BusinessEntity: lseg
+      Region: europe-west2
+      Environment: dev
+      AWSResourceType: ec2
+      BusinessUnit: lseg
+      ApplicationID: lsp-12
+      Reason: deployment
+      Owner: LSEG
+      ManagedBy: LSEG
+      Automation: abc
   authentication:
     awsIAM:
       adminIdentityARNs: somethingtocopy

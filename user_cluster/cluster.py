@@ -18,12 +18,21 @@ parser.add_argument('--securityGroupIDs', nargs='+', required=True, type=str)  #
 parser.add_argument('--rootVolSize', required=True, type=str)
 parser.add_argument('--etcdVolSize', required=True, type=str)
 parser.add_argument('--hubMembershipName', required=True, type=str)
-parser.add_argument('--tag1', required=True, type=str)
-parser.add_argument('--tag2', required=True, type=str)
-parser.add_argument('--tag3', required=True, type=str)
-parser.add_argument('--tag4', required=True, type=str)
 
-# parser.add_argument('--identityARN', required=True, type=str)
+# tags
+parser.add_argument('--CostCentre', required=True, type=str)
+parser.add_argument('--ProjectCode', required=True, type=str)
+parser.add_argument('--ApplicationName', required=True, type=str)
+parser.add_argument('--BusinessEntity', required=True, type=str)
+parser.add_argument('--Region', required=True, type=str)
+parser.add_argument('--Environment', required=True, type=str)
+parser.add_argument('--AWSResourceType', required=True, type=str)
+parser.add_argument('--BusinessUnit', required=True, type=str)
+parser.add_argument('--ApplicationID', required=True, type=str)
+parser.add_argument('--Reason', required=True, type=str)
+parser.add_argument('--Owner', required=True, type=str)
+parser.add_argument('--ManagedBy', required=True, type=str)
+parser.add_argument('--Automation', required=True, type=str)
 
 args = parser.parse_args()
 config_file = args.configFile
@@ -41,10 +50,21 @@ security_groupIDs = args.securityGroupIDs
 root_vol_size = args.rootVolSize
 etcd_vol_size = args.etcdVolSize
 hub_membership_name = args.hubMembershipName
-tag1 = args.tag1
-tag2 = args.tag2
-tag3 = args.tag3
-tag4 = args.tag4
+
+# tags
+tag_cost_centre = args.CostCentre
+tag_project_code = args.ProjectCode
+tag_application_name = args.ApplicationName
+tag_business_entity = args.BusinessEntity
+tag_region = args.Region
+tag_environment = args.Environment
+tag_aws_resourcetype = args.AWSResourceType
+tag_business_unit = args.BusinessUnit
+tag_applicationId = args.ApplicationID
+tag_reason = args.Reason
+tag_owner = args.Owner
+tag_managedBy = args.ManagedBy
+tag_automation = args.Automation
 
 
 # Read the yaml
@@ -55,6 +75,7 @@ def read_yaml(yaml_file):
         for dic in parsed_yaml:
             if dic["kind"] == "AWSCluster":
                 return dic
+        return None
     except OSError as error:
         print("ERROR: Could not parse file: ", error)
         sys.exit()
@@ -94,10 +115,19 @@ def merge_data_template(parsed_template, parsed_config):
     # tags
     tags_template_control_plane = template_control_plane["tags"]
 
-    tags_template_control_plane["tag1"] = tag1
-    tags_template_control_plane["tag2"] = tag2
-    tags_template_control_plane["tag3"] = tag3
-    tags_template_control_plane["tag4"] = tag4
+    tags_template_control_plane["CostCentre"] = tag_cost_centre
+    tags_template_control_plane["ProjectCode"] = tag_project_code
+    tags_template_control_plane["ApplicationName"] = tag_application_name
+    tags_template_control_plane["BusinessEntity"] = tag_business_entity
+    tags_template_control_plane["Region"] = tag_region
+    tags_template_control_plane["Environment"] = tag_environment
+    tags_template_control_plane["AWSResourceType"] = tag_aws_resourcetype
+    tags_template_control_plane["BusinessUnit"] = tag_business_unit
+    tags_template_control_plane["ApplicationID"] = tag_applicationId
+    tags_template_control_plane["Reason"] = tag_reason
+    tags_template_control_plane["Owner"] = tag_owner
+    tags_template_control_plane["ManagedBy"] = tag_managedBy
+    tags_template_control_plane["Automation"] = tag_automation
 
     template["authentication"]["awsIAM"]["adminIdentityARNs"] = cluster0["authentication"]["awsIAM"][
         "adminIdentityARNs"]
@@ -106,17 +136,20 @@ def merge_data_template(parsed_template, parsed_config):
 
 
 if __name__ == "__main__":
-
     print("Populating the User Cluster template....")
     # Parse Yaml first
     parsed_cluster0_yaml = read_yaml(config_file)
     parsed_template_yaml = read_yaml(template_file)
 
-    # Populate template file
-    merged_template = merge_data_template(parsed_template_yaml, parsed_cluster0_yaml)
+    if parsed_cluster0_yaml is not None and parsed_template_yaml is not None:
+        # Populate template file
+        merged_template = merge_data_template(parsed_template_yaml, parsed_cluster0_yaml)
 
-    # Create the output YAML file
-    output = open(output_file, 'w+')
-    yaml.dump(merged_template, output, allow_unicode=True, default_flow_style=False)
+        # Create the output YAML file
+        output = open(output_file, 'w+')
+        yaml.dump(merged_template, output, allow_unicode=True, default_flow_style=False)
 
-    print("DONE.... %s CREATED." % output_file)
+        print("DONE.... %s CREATED." % output_file)
+
+    else:
+        print("ERROR: 'AWSCluster' not present in the config or the template")
