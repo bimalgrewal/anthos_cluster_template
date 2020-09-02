@@ -1,0 +1,31 @@
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSNodePool
+metadata:
+  name: argeparse_param
+spec:
+  clusterName: argeparse_param
+  version: cluster0-yaml # latest version is 1.16.13-gke.1401
+  region: cluster0-yaml
+  subnetID: argeparse_param
+  minNodeCount: argeparse_param
+  maxNodeCount: argeparse_param
+  maxPodsPerNode: argeparse_param
+  instanceType: argeparse_param
+  keyName: cluster0-yaml
+  iamInstanceProfile: cluster0-yaml
+  rootVolume:
+    sizeGiB: argeparse_param
+  tags:
+    CostCentre: London
+    ProjectCode: abc
+    ApplicationName: lsp
+    BusinessEntity: lseg
+    Region:
+    Environment:
+    AWSResourceType:
+    BusinessUnit:
+    ApplicationID:
+    Reason:
+    Owner:
+    ManagedBy:
+    Automation:

@@ -1,0 +1,42 @@
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSCluster
+metadata:
+  name: cluster1
+spec:
+  authentication:
+    awsIAM:
+      adminIdentityARNs: somethingtocopy
+  controlPlane:
+    databaseEncryption:
+      kmsKeyARN: mykmskeyarn
+    etcd:
+      mainVolume.sizeGIB: '10'
+    hub:
+      membershipName: elite
+    iamInstanceProfile: 12987654321
+    instanceType: t3.large
+    keyName: id_rsa
+    rootVolume:
+      sizeGiB: '5'
+    securityGroupIDs:
+    - sg-1
+    - sg-2
+    - sg-3
+    subnetIDs:
+    - subnetId-4
+    - subnetId-5
+    tags:
+      tag1: tes-tag1
+      tag2: tes-tag2
+      tag3: tes-tag3
+      tag4: tes-tag4
+    version: 1.16.13-gke.1401
+  networking:
+    podAddressCIDRBlocks: 111.111.11
+    serviceAddressCIDRBlocks: 222.222.22
+    serviceLoadBalancerSubnetIDs:
+    - subnetId-1
+    - subnetId-2
+    - subnetId-3
+    vpcID: vpcId-123
+  region: eu-west-2

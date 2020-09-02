@@ -1,0 +1,38 @@
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSCluster
+metadata:
+  name:
+spec:
+  region:
+  networking:
+    vpcID:
+    podAddressCIDRBlocks:
+    serviceAddressCIDRBlocks:
+    serviceLoadBalancerSubnetIDs:
+      -
+  controlPlane:
+    version:
+    instanceType:
+    keyName:
+    subnetIDs:
+      -
+    securityGroupIDs:
+      -
+    iamInstanceProfile:
+    rootVolume:
+      sizeGiB:
+    etcd:
+      mainVolume.sizeGIB:
+    databaseEncryption:
+      kmsKeyARN: mykmskeyarn
+    hub:
+      membershipName:
+    tags:
+      tag1:
+      tag2:
+      tag3:
+      tag4:
+  authentication:
+    awsIAM:
+      adminIdentityARNs:
+

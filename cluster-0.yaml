@@ -1,0 +1,69 @@
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSCluster
+metadata:
+  name: argparseArgument
+spec:
+  region: eu-west-2
+  networking:
+    vpcID: argeParseArgument
+    podAddressCIDRBlocks: argeParseArgument
+    serviceAddressCIDRBlocks: argeParseArgument
+    serviceLoadBalancerSubnetIDs:
+      - argeParseArgument[]
+  controlPlane:
+    version: 1.16.13-gke.1401
+    instanceType: argeParseArgument
+    keyName: id_rsa
+    subnetIDs:
+      - argeParseArgument[]
+    securityGroupIDs:
+      - argeParseArgument[]
+    iamInstanceProfile: 12987654321
+    rootVolume:
+      sizeGiB: argeParseArgument
+    etcd:
+      mainVolume.sizeGIB: argeParseArgument
+    databaseEncryption:
+      kmsKeyARN: mykmskeyarn
+    hub:
+      membershipName: argeParseArgument
+    tags:
+      tag1: argeParseArgument
+      tag2: argeParseArgument
+      tag3: argeParseArgument
+      tag4: argeParseArgument
+  authentication:
+    awsIAM:
+      adminIdentityARNs: somethingtocopy
+---
+apiVersion: multicloud.cluster.gke.io/v1
+kind: AWSNodePool
+metadata:
+  name: argeparse_param
+spec:
+  clusterName: argeparse_param
+  version: 1.0.0 # latest version is 1.16.13-gke.1401
+  region: cluster0-yaml
+  subnetID: argeparse_param
+  minNodeCount: argeparse_param
+  maxNodeCount: argeparse_param
+  maxPodsPerNode: argeparse_param
+  instanceType: argeparse_param
+  keyName: key-nodepool
+  iamInstanceProfile: cluster0-yaml
+  rootVolume:
+    sizeGiB: argeparse_param
+  tags:
+    CostCentre: London
+    ProjectCode: abc
+    ApplicationName: lsp
+    BusinessEntity: lseg
+    Region: europe-west2
+    Environment: dev
+    AWSResourceType: ec2
+    BusinessUnit: lseg
+    ApplicationID: lsp-12
+    Reason: deployment
+    Owner: LSEG
+    ManagedBy: LSEG
+    Automation: abc
